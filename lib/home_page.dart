@@ -37,7 +37,7 @@ class _RandomizedRadialChartExampleState
   double value = 50.0;
 
   void _randomize() async {
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 2000), () {
       setState(() {
         data = _generateRandomData();
         _chartKey.currentState.updateData(data);
@@ -46,12 +46,19 @@ class _RandomizedRadialChartExampleState
   }
 
   List<CircularStackEntry> _generateRandomData() {
-    int stackCount = random.nextInt(10);
+    int stackCount = 3;
     List<CircularStackEntry> data = new List.generate(stackCount, (i) {
-      int segCount = random.nextInt(10);
+      int segCount = 0;
+      while (segCount == 0) {
+        segCount = random.nextInt(10);
+      }
       List<CircularSegmentEntry> segments = new List.generate(segCount, (j) {
         Color randomColor = ColorPalette.primary.random(random);
-        return new CircularSegmentEntry(random.nextDouble(), randomColor);
+        double nextDouble = 0.0;
+        while (nextDouble == 0 || nextDouble < 0.3) {
+          nextDouble = random.nextDouble();
+        }
+        return new CircularSegmentEntry(nextDouble, randomColor);
       });
       return new CircularStackEntry(segments);
     });
