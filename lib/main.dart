@@ -32,6 +32,7 @@ class BasicPage extends StatefulWidget {
 class _BasicPageState extends State<BasicPage> {
   PageController _pageController;
   int _index = 0;
+  bool _isVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +48,14 @@ class _BasicPageState extends State<BasicPage> {
         ],
         controller: _pageController,
         onPageChanged: onIndexChanged,
+      ),
+      floatingActionButton: new Visibility(
+        visible: _isVisible,
+        child: new FloatingActionButton(
+          onPressed: () {}, //nothing happens XD
+          tooltip: 'Add',
+          child: new Icon(Icons.add),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
@@ -77,6 +86,11 @@ class _BasicPageState extends State<BasicPage> {
   }
 
   void onIndexChanged(int index) {
+    if(index == 0){
+      _isVisible = true;
+    } else {
+      _isVisible = false;
+    }
     setState(() {
       this._index = index;
     });
