@@ -22,6 +22,8 @@ class ListItem extends StatelessWidget {
   final String name;
   final double startValue;
   final double endValue;
+  double _lowerValue;
+  double _upperValue;
 
   ListItem(this.name, this.startValue, this.endValue);
 
@@ -42,8 +44,8 @@ class ListItem extends StatelessWidget {
               max: 24,
               min: 0,
               onDragging: (handlerIndex, lowerValue, upperValue) {
-                //_lowerValue = lowerValue;
-                //_upperValue = upperValue;
+                _lowerValue = lowerValue;
+                _upperValue = upperValue;
               },
               hatchMark: FlutterSliderHatchMark(
                 distanceFromTrackBar: 10,
@@ -61,7 +63,17 @@ class ListItem extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(left: 220.0, top: 20, bottom: 15),
             child: RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context){
+                      return AlertDialog(
+                        title: Text(name),
+                        content: Text(""+_lowerValue.toString()+" - "+_upperValue.toString()),
+                      );
+                    }
+                );
+              },
               child: Text('Submit', style: TextStyle(fontSize: 20)),
             ),
           )
