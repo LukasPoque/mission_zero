@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mission_zero/history_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,65 +22,75 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<StatefulWidget> createState() {
+    return _MyHomePageState();
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 1;
-
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: History',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Schedule',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  PageController _pageController;
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Mission Zero #42'),
-        ),
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        bottomNavigationBar: SizedBox(
-          height: 100,
-          child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.history),
-                title: Text('History'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text('Home'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.alarm_on),
-                title: Text('Schedule'),
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.amber[800],
-            onTap: _onItemTapped,
+      appBar: AppBar(
+        title: Text('Mission Zero'),
+      ),
+      body: new PageView(
+        children: [
+          new HistoryPage(Colors.white),
+          new Container(color: Colors.blue),
+          new Container(color: Colors.grey)
+        ],
+        controller: _pageController,
+        onPageChanged: onIndexChanged,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: _index,
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.history),
+            title: new Text('History'),
           ),
-        ));
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            title: new Text('Home'),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.alarm_on),
+              title: Text('Schedule')
+          )
+        ],
+      ),
+    );
   }
+
+  void onTabTapped(int index) {
+    _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease
+    );
+  }
+
+  void onIndexChanged(int index){
+    setState((){
+      this._index = index;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = new PageController();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    _pageController.dispose();
+  }
+
 }
