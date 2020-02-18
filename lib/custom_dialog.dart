@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CustomDialog extends StatelessWidget {
   final String title, description, buttonText;
@@ -73,7 +74,10 @@ class CustomDialog extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pop(); // To close the dialog
                   },
-                  child: Text(buttonText, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                  child: Text(
+                    buttonText,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
                 ),
               ),
             ],
@@ -86,7 +90,8 @@ class CustomDialog extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: Colors.amber,
             radius: Consts.avatarRadius,
-            child: Icon(Icons.battery_charging_full,color: Colors.black,size: 50),
+            child: Container(padding: EdgeInsets.all(10),child: SvgPicture.asset("assets/logo_black.svg"))
+                //Icon(Icons.battery_charging_full,color: Colors.black, size: 50),
           ),
         ),
       ],
