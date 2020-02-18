@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 
+import 'custom_dialog.dart';
+
 class SchedulePage extends StatelessWidget {
   final Color color;
 
@@ -66,13 +68,13 @@ class ListItem extends StatelessWidget {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (BuildContext context){
-                      return AlertDialog(
-                        title: Text(name),
-                        content: Text(""+_lowerValue.toString()+" - "+_upperValue.toString()),
+                    builder: (BuildContext context) {
+                      return CustomDialog(
+                        title: "The best starting time for your " + name + ":",
+                        description: calculateSpot(_lowerValue, _upperValue),
+                        buttonText: "Agree",
                       );
-                    }
-                );
+                    });
               },
               child: Text('Confirm', style: TextStyle(fontSize: 20)),
             ),
@@ -81,4 +83,9 @@ class ListItem extends StatelessWidget {
       ),
     );
   }
+
+  String calculateSpot(start, end){
+    return "6:30pm";
+  }
 }
+
