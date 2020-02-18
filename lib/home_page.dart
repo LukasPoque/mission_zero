@@ -3,6 +3,9 @@ import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'dart:math' as Math;
 import 'color_palette.dart';
 
+double START_MONEY_SAVED = 12.43;
+double START_ECO_SCORE = 0.67;
+
 class HomePage extends StatelessWidget {
   final Color color;
 
@@ -10,7 +13,22 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RandomizedRadialChartExample();
+    return Column(
+      children: <Widget>[
+        Stack(
+          children: <Widget>[
+            RandomizedRadialChartExample(),
+            Center(
+                child: Container(
+              height: 50,
+              width: 50,
+              color: Colors.red,
+            ))
+          ],
+        ),
+        MoneyText()
+      ],
+    );
   }
 }
 
@@ -24,7 +42,7 @@ class _RandomizedRadialChartExampleState
     extends State<RandomizedRadialChartExample> {
   final GlobalKey<AnimatedCircularChartState> _chartKey =
       new GlobalKey<AnimatedCircularChartState>();
-  final _chartSize = const Size(300.0, 300.0);
+  final _chartSize = const Size(350.0, 350.0);
   final Math.Random random = new Math.Random();
   List<CircularStackEntry> data;
 
@@ -74,6 +92,40 @@ class _RandomizedRadialChartExampleState
       size: _chartSize,
       initialChartData: data,
       chartType: CircularChartType.Radial,
+    );
+  }
+}
+
+class MoneyText extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _MoneyTextState();
+}
+
+class _MoneyTextState extends State<MoneyText> {
+  final double stepSize = 0.2;
+  double money = 0.0;
+  double targetMoney = START_MONEY_SAVED;
+
+  void runningText() {
+    Future.delayed(const Duration(milliseconds: 2), () {
+      if (money < targetMoney) {
+        setState(() {
+          if (targetMoney - money < 0.5) {
+            money = START_MONEY_SAVED;
+          } else {
+            money += stepSize;
+          }
+        });
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    runningText();
+    return Text(
+      money.toStringAsFixed(2) + "€",
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
     );
   }
 }
