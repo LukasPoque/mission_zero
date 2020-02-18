@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mission_zero/history_page.dart';
+import 'package:mission_zero/home_page.dart';
+import 'package:mission_zero/schedule_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,22 +14,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
-      home: MyHomePage(title: 'Mission Zero'),
+      home: BasicPage(title: 'Mission Zero'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class BasicPage extends StatefulWidget {
+  BasicPage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
   State<StatefulWidget> createState() {
-    return _MyHomePageState();
+    return _BasicPageState();
   }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _BasicPageState extends State<BasicPage> {
   PageController _pageController;
   int _index = 0;
 
@@ -40,8 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: new PageView(
         children: [
           new HistoryPage(Colors.white),
-          new Container(color: Colors.blue),
-          new Container(color: Colors.grey)
+          new HomePage(Colors.blue),
+          new SchedulePage(Colors.grey)
         ],
         controller: _pageController,
         onPageChanged: onIndexChanged,
