@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 
+import 'algo.dart';
 import 'custom_dialog.dart';
 
 class SchedulePage extends StatelessWidget {
@@ -54,10 +55,9 @@ class ListItem extends StatelessWidget {
                 labels: [
                   FlutterSliderHatchMarkLabel(percent: 0, label: Text('0am')),
                   FlutterSliderHatchMarkLabel(percent: 25, label: Text('6am')),
-                  FlutterSliderHatchMarkLabel(percent: 50, label: Text('12am')),
+                  FlutterSliderHatchMarkLabel(percent: 50, label: Text('12pm')),
                   FlutterSliderHatchMarkLabel(percent: 75, label: Text('6pm')),
-                  FlutterSliderHatchMarkLabel(
-                      percent: 100, label: Text('12pm')),
+                  FlutterSliderHatchMarkLabel(percent: 100, label: Text('0am')),
                 ],
               ),
             ),
@@ -71,7 +71,8 @@ class ListItem extends StatelessWidget {
                     builder: (BuildContext context) {
                       return CustomDialog(
                         title: "The best starting time for your " + name + ":",
-                        description: calculateSpot(_lowerValue, _upperValue),
+                        description: calculateSpot(
+                            _lowerValue.floor(), _upperValue.floor()),
                         buttonText: "Agree",
                       );
                     });
@@ -84,8 +85,7 @@ class ListItem extends StatelessWidget {
     );
   }
 
-  String calculateSpot(start, end){
-    return "6:30pm";
+  String calculateSpot(start, end) {
+    return Algo.main(start, 0, end, 0);
   }
 }
-
