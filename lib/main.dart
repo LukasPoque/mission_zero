@@ -42,8 +42,8 @@ class _BasicPageState extends State<BasicPage> {
       body: new PageView(
         children: [
           new SchedulePage(Colors.grey),
-          new HistoryPage(Colors.white),
-          new HomePage(Colors.blue)
+          new HomePage(Colors.blue),
+          new HistoryPage(Colors.white)
         ],
         controller: _pageController,
         onPageChanged: onIndexChanged,
