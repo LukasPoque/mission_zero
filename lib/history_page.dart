@@ -28,17 +28,17 @@ class HistoryPage extends StatelessWidget {
               Container(
                   height: 70,
                   alignment: Alignment.center,
+                  child: Text("Dishwasher")),
+              Container(height: 3, color: Colors.grey),
+              Container(
+                  height: 70,
+                  alignment: Alignment.center,
                   child: Text("Washing machine")),
               Container(height: 3, color: Colors.grey),
               Container(
                   height: 70,
                   alignment: Alignment.center,
                   child: Text("Dryer")),
-              Container(height: 3, color: Colors.grey),
-              Container(
-                  height: 70,
-                  alignment: Alignment.center,
-                  child: Text("Dishwasher")),
               Container(height: 3, color: Colors.grey),
               Container(
                   height: 70,
@@ -77,21 +77,60 @@ class _ConsumptionChartState extends State<ConsumptionChart> {
 
   createSeries() {
     List<ConsumerData> dishwasherList = new List<ConsumerData>();
+    List<ConsumerData> washList = new List<ConsumerData>();
+    List<ConsumerData> dryerList = new List<ConsumerData>();
+    //List<ConsumerData> overallList = new List<ConsumerData>();
     for (int i = 1; i < 25; i++) {
-      int time = int.parse(data[i][0].substring(11, 13));
-      int consumption = data[i][1].round();
-      dishwasherList.add(new ConsumerData(time, consumption));
+      int timeDi = int.parse(data[i][0].substring(11, 13));
+      int consumptionDi = data[i][1].round();
+      dishwasherList.add(new ConsumerData(timeDi, consumptionDi));
+
+      int timeW = int.parse(data[i][0].substring(11, 13));
+      int consumptionW = data[i][2].round();
+      washList.add(new ConsumerData(timeW, consumptionW));
+
+      int timeDr = int.parse(data[i][0].substring(11, 13));
+      int consumptionDr = data[i][3].round();
+      dryerList.add(new ConsumerData(timeDr, consumptionDr));
+
+    /*  int timeAll = int.parse(data[i][0].substring(11, 13));
+      int consumptionAll = data[i][4].round();
+      dryerList.add(new ConsumerData(timeAll, consumptionAll));*/
     }
     print("LIST IS READY CALCULATED" + DateTime.now().toIso8601String());
     //geschirr
     seriesList.add(new charts.Series<ConsumerData, int>(
       id: "Dishwasher",
       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-      areaColorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault.lighter,
+      //areaColorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault.lighter,
       domainFn: (ConsumerData dataC, _) => dataC.timestamp,
       measureFn: (ConsumerData dataC, _) => dataC.consumption,
       data: dishwasherList,
     ));
+    seriesList.add(new charts.Series<ConsumerData, int>(
+      id: "Wash",
+      colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+      //areaColorFn: (_, __) => charts.MaterialPalette.red.shadeDefault.lighter,
+      domainFn: (ConsumerData dataC, _) => dataC.timestamp,
+      measureFn: (ConsumerData dataC, _) => dataC.consumption,
+      data: washList,
+    ));
+    seriesList.add(new charts.Series<ConsumerData, int>(
+      id: "Dryer",
+      colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+      //areaColorFn: (_, __) => charts.MaterialPalette.green.shadeDefault.lighter,
+      domainFn: (ConsumerData dataC, _) => dataC.timestamp,
+      measureFn: (ConsumerData dataC, _) => dataC.consumption,
+      data: dryerList,
+    ));
+/*    seriesList.add(new charts.Series<ConsumerData, int>(
+      id: "All",
+      colorFn: (_, __) => charts.MaterialPalette.gray.shadeDefault,
+      //areaColorFn: (_, __) => charts.MaterialPalette.green.shadeDefault.lighter,
+      domainFn: (ConsumerData dataC, _) => dataC.timestamp,
+      measureFn: (ConsumerData dataC, _) => dataC.consumption,
+      data: overallList,
+    ));*/
     print("series ready: " + DateTime.now().toIso8601String());
     ready = true;
   }
