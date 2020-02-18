@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mission Zero',
+      title: 'Eco Flex',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
@@ -37,7 +37,7 @@ class _BasicPageState extends State<BasicPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mission Zero'),
+        title: Text('Eco Flex'),
       ),
       body: new PageView(
         children: [

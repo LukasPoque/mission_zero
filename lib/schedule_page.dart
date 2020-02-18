@@ -74,7 +74,7 @@ class ListItem extends StatelessWidget {
                     }
                 );
               },
-              child: Text('Submit', style: TextStyle(fontSize: 20)),
+              child: Text('Confirm', style: TextStyle(fontSize: 20)),
             ),
           )
         ],
