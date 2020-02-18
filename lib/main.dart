@@ -41,9 +41,9 @@ class _BasicPageState extends State<BasicPage> {
       ),
       body: new PageView(
         children: [
+          new SchedulePage(Colors.grey),
           new HistoryPage(Colors.white),
-          new HomePage(Colors.blue),
-          new SchedulePage(Colors.grey)
+          new HomePage(Colors.blue)
         ],
         controller: _pageController,
         onPageChanged: onIndexChanged,
@@ -53,16 +53,18 @@ class _BasicPageState extends State<BasicPage> {
         currentIndex: _index,
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.history),
-            title: new Text('History'),
-          ),
+              icon: Icon(Icons.alarm_on),
+              title: Text('Schedule',
+                  style: TextStyle(fontWeight: FontWeight.bold))),
           BottomNavigationBarItem(
             icon: new Icon(Icons.home),
-            title: new Text('Home'),
+            title:
+                new Text('Home', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.alarm_on),
-              title: Text('Schedule')
+            icon: new Icon(Icons.history),
+            title: new Text('History',
+                style: TextStyle(fontWeight: FontWeight.bold)),
           )
         ],
       ),
@@ -70,15 +72,12 @@ class _BasicPageState extends State<BasicPage> {
   }
 
   void onTabTapped(int index) {
-    _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease
-    );
+    _pageController.animateToPage(index,
+        duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
-  void onIndexChanged(int index){
-    setState((){
+  void onIndexChanged(int index) {
+    setState(() {
       this._index = index;
     });
   }
@@ -90,9 +89,8 @@ class _BasicPageState extends State<BasicPage> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     _pageController.dispose();
   }
-
 }
