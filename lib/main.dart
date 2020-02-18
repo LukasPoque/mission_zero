@@ -38,7 +38,7 @@ class _BasicPageState extends State<BasicPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eco Flex'),
+        title: Text('Eco Flex',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: new PageView(
         children: [
