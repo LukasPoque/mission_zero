@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'package:timeline_list/timeline.dart';
+import 'package:timeline_list/timeline_model.dart';
 import 'dart:math' as Math;
 import 'color_palette.dart';
 
@@ -30,7 +32,8 @@ class HomePage extends StatelessWidget {
                             child: Text("eco score by ©EcoFlex")))
                   ],
                 )),
-            Information()
+            Information(),
+            ScheduleTimeline()
           ],
         ));
   }
@@ -177,7 +180,7 @@ class _COTextState extends State<COText> {
     Future.delayed(const Duration(milliseconds: 2), () {
       if (co < targetCO) {
         setState(() {
-          if (targetCO - co < 0.5) {
+          if (targetCO - co < 0.05) {
             co = START_CO_SAVED;
           } else {
             co += stepSize;
@@ -194,5 +197,19 @@ class _COTextState extends State<COText> {
       co.toStringAsFixed(3) + "t",
       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
     );
+  }
+}
+
+class ScheduleTimeline extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _ScheduleTimelineState();
+  }
+}
+
+class _ScheduleTimelineState extends State<ScheduleTimeline> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.red);
   }
 }
