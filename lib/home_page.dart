@@ -4,7 +4,8 @@ import 'dart:math' as Math;
 import 'color_palette.dart';
 
 double START_MONEY_SAVED = 12.43;
-double START_ECO_SCORE = 0.67;
+double START_CO_SAVED = 1.247;
+double START_ECO_SCORE = 0.71;
 
 class HomePage extends StatelessWidget {
   final Color color;
@@ -13,22 +14,25 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Stack(
+    return Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: Column(
           children: <Widget>[
-            RandomizedRadialChartExample(),
-            Center(
-                child: Container(
-              height: 50,
-              width: 50,
-              color: Colors.red,
-            ))
+            Card(
+                elevation: 10,
+                child: Column(
+                  children: <Widget>[
+                    RandomizedRadialChartExample(),
+                    Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                            margin: const EdgeInsets.only(bottom: 5, right: 5),
+                            child: Text("eco score by ©EcoFlex")))
+                  ],
+                )),
+            Information()
           ],
-        ),
-        MoneyText()
-      ],
-    );
+        ));
   }
 }
 
@@ -86,12 +90,41 @@ class _RandomizedRadialChartExampleState
 
   @override
   Widget build(BuildContext context) {
+    TextStyle _labelStyle = Theme.of(context).textTheme.title.merge(
+        new TextStyle(
+            color: Colors.green, fontWeight: FontWeight.bold, fontSize: 55));
+
     _randomize();
     return new AnimatedCircularChart(
       key: _chartKey,
       size: _chartSize,
       initialChartData: data,
+      holeLabel: START_ECO_SCORE.toString(),
+      labelStyle: _labelStyle,
       chartType: CircularChartType.Radial,
+    );
+  }
+}
+
+class Information extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 25, left: 40, right: 40, bottom: 25),
+      child: Stack(
+        children: <Widget>[
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                children: <Widget>[MoneyText(), Text("Saved money")],
+              )),
+          Align(
+              alignment: Alignment.centerRight,
+              child: Column(
+                children: <Widget>[COText(), Text("Saved CO2")],
+              ))
+        ],
+      ),
     );
   }
 }
@@ -125,6 +158,40 @@ class _MoneyTextState extends State<MoneyText> {
     runningText();
     return Text(
       money.toStringAsFixed(2) + "€",
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+    );
+  }
+}
+
+class COText extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _COTextState();
+}
+
+class _COTextState extends State<COText> {
+  final double stepSize = 0.01;
+  double co = 0.0;
+  double targetCO = START_CO_SAVED;
+
+  void runningText() {
+    Future.delayed(const Duration(milliseconds: 2), () {
+      if (co < targetCO) {
+        setState(() {
+          if (targetCO - co < 0.5) {
+            co = START_CO_SAVED;
+          } else {
+            co += stepSize;
+          }
+        });
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    runningText();
+    return Text(
+      co.toStringAsFixed(3) + "t",
       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
     );
   }

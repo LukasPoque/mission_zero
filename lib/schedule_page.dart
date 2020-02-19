@@ -11,13 +11,15 @@ class SchedulePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListItem("Dishwasher", 15, 20),
-        ListItem("Washing machine", 8, 17),
-        ListItem("Dryer", 15, 20)
-      ],
-    );
+    return Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: Column(
+          children: <Widget>[
+            ListItem("Dishwasher", 15, 20),
+            ListItem("Washing machine", 8, 17),
+            ListItem("Dryer", 15, 20)
+          ],
+        ));
   }
 }
 
