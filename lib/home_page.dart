@@ -5,7 +5,7 @@ import 'dart:math' as Math;
 import 'color_palette.dart';
 
 double START_MONEY_SAVED = 12.43;
-double START_CO_SAVED = 1.247;
+double START_CO_SAVED = 136;
 double START_ECO_SCORE = 0.71;
 
 class HomePage extends StatelessWidget {
@@ -171,7 +171,7 @@ class COText extends StatefulWidget {
 }
 
 class _COTextState extends State<COText> {
-  final double stepSize = 0.01;
+  final double stepSize = 3;
   double co = 0.0;
   double targetCO = START_CO_SAVED;
 
@@ -179,7 +179,7 @@ class _COTextState extends State<COText> {
     Future.delayed(const Duration(milliseconds: 2), () {
       if (co < targetCO) {
         setState(() {
-          if (targetCO - co < 0.05) {
+          if (targetCO - co < 5) {
             co = START_CO_SAVED;
           } else {
             co += stepSize;
@@ -193,7 +193,7 @@ class _COTextState extends State<COText> {
   Widget build(BuildContext context) {
     runningText();
     return Text(
-      co.toStringAsFixed(3) + "t",
+      co.floor().toString() + "kg",
       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
     );
   }
