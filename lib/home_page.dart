@@ -235,13 +235,13 @@ class ScheduleTimeline extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 15),
                       child: Icon(Icons.access_time)),
                   Container(
-                      margin: const EdgeInsets.only(right: 78),
+                      margin: const EdgeInsets.only(right: 85),
                       child: Text(
-                        "11:50am",
+                        "8:40pm",
                         style: TextStyle(fontSize: 24),
                       )),
                   Text(
-                    "Washing machine",
+                    "Dishwasher",
                     style: TextStyle(fontSize: 24),
                   ),
                 ],

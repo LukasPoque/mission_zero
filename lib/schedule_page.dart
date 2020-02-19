@@ -15,9 +15,9 @@ class SchedulePage extends StatelessWidget {
         margin: const EdgeInsets.only(top: 10),
         child: Column(
           children: <Widget>[
-            ListItem("Dishwasher", 15, 20),
+            ListItem("Dishwasher", 19, 22),
             ListItem("Washing machine", 8, 17),
-            ListItem("Dryer", 15, 20)
+            ListItem("Dryer", 3, 9)
           ],
         ));
   }
