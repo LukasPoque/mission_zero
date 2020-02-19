@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:timeline_list/timeline.dart';
 import 'package:timeline_list/timeline_model.dart';
 import 'dart:math' as Math;
@@ -200,16 +201,48 @@ class _COTextState extends State<COText> {
   }
 }
 
-class ScheduleTimeline extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _ScheduleTimelineState();
-  }
-}
-
-class _ScheduleTimelineState extends State<ScheduleTimeline> {
+class ScheduleTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.red);
+    return Card(
+      elevation: 10,
+      child: Container(
+          margin: const EdgeInsets.all(10),
+          child: Column(
+            children: <Widget>[
+              CircleAvatar(
+                  backgroundColor: Colors.lightBlue,
+                  radius: 40,
+                  child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: SvgPicture.asset("assets/logo_black.svg"))
+                  //Icon(Icons.battery_charging_full,color: Colors.black, size: 50),
+                  ),
+              Container(
+                margin: const EdgeInsets.only(top: 15, bottom: 15),
+                height: 5,
+                color: Colors.black,
+              ),
+              Row(
+                children: <Widget>[
+                  Container(
+                      margin: const EdgeInsets.only(right: 15),
+                      child: Icon(Icons.access_time)),
+                  Container(
+                      margin: const EdgeInsets.only(right: 78),
+                      child: Text(
+                        "11:50am",
+                        style: TextStyle(fontSize: 24),
+                      )),
+                  Text(
+                    "Washing machine",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ],
+              ),
+              Container(margin: const EdgeInsets.only(bottom: 15)),
+            ],
+          )),
+    );
   }
 }

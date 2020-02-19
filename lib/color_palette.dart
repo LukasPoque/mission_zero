@@ -10,7 +10,8 @@ class ColorPalette {
     Colors.green[800],
     Colors.green[100],
     Colors.teal[400],
-    Colors.teal[200]
+    Colors.teal[200],
+    Colors.blue[200]
   ]);
 
   ColorPalette(List<Color> colors) : _colors = colors {

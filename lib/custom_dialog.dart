@@ -91,7 +91,7 @@ class CustomDialog extends StatelessWidget {
           left: Consts.padding,
           right: Consts.padding,
           child: CircleAvatar(
-            backgroundColor: Colors.amber,
+            backgroundColor: Colors.lightBlue,
             radius: Consts.avatarRadius,
             child: Container(padding: EdgeInsets.all(10),child: SvgPicture.asset("assets/logo_black.svg"))
                 //Icon(Icons.battery_charging_full,color: Colors.black, size: 50),
