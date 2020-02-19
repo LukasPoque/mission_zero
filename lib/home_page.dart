@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:timeline_list/timeline.dart';
-import 'package:timeline_list/timeline_model.dart';
 import 'dart:math' as Math;
 import 'color_palette.dart';
 
@@ -202,8 +200,16 @@ class _COTextState extends State<COText> {
 }
 
 class ScheduleTimeline extends StatelessWidget {
+
+  startDeley(){
+    Future.delayed(const Duration(milliseconds: 4000), () {
+      //do
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    startDeley();
     return Card(
       elevation: 10,
       child: Container(

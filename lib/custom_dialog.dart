@@ -68,8 +68,8 @@ class CustomDialog extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10,),
-              Text("possible money save: 0.04€"),
-              Text("possible CO2 save: 120kg"),
+              Text("possible money save: 0.013€"),
+              Text("possible CO2 save: 2.3kg"),
               SizedBox(height: 24.0),
               Align(
                 alignment: Alignment.bottomRight,
