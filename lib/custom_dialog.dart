@@ -72,7 +72,7 @@ class CustomDialog extends StatelessWidget {
               ),
               Text("possible money save: 0.013€"),
               Text("possible CO2 save: 2.3kg"),
-              Text("renewable energy: 58%"),
+              Text("renewable energy: 53%"),
               SizedBox(height: 24.0),
               Stack(
                 children: <Widget>[
