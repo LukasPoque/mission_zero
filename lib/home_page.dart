@@ -200,10 +200,9 @@ class _COTextState extends State<COText> {
 }
 
 class ScheduleTimeline extends StatelessWidget {
-
-  startDeley(){
+  startDeley() {
     Future.delayed(const Duration(milliseconds: 4000), () {
-      //do
+      //call the https post
     });
   }
 

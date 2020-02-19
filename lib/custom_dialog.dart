@@ -67,23 +67,44 @@ class CustomDialog extends StatelessWidget {
                   fontSize: 32.0,
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Text("possible money save: 0.013€"),
               Text("possible CO2 save: 2.3kg"),
               Text("renewable energy: 58%"),
               SizedBox(height: 24.0),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // To close the dialog
-                  },
-                  child: Text(
-                    buttonText,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // To close the dialog
+                      },
+                      child: Text(
+                        buttonText,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // To close the dialog
+                      },
+                      child: Text(
+                        "Start now",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
+                  ),
+
+                ],
+              )
             ],
           ),
         ),
@@ -92,11 +113,13 @@ class CustomDialog extends StatelessWidget {
           left: Consts.padding,
           right: Consts.padding,
           child: CircleAvatar(
-            backgroundColor: Colors.lightBlue,
-            radius: Consts.avatarRadius,
-            child: Container(padding: EdgeInsets.all(10),child: SvgPicture.asset("assets/logo_black.svg"))
-                //Icon(Icons.battery_charging_full,color: Colors.black, size: 50),
-          ),
+              backgroundColor: Colors.lightBlue,
+              radius: Consts.avatarRadius,
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: SvgPicture.asset("assets/logo_black.svg"))
+              //Icon(Icons.battery_charging_full,color: Colors.black, size: 50),
+              ),
         ),
       ],
     );

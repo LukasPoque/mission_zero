@@ -1,0 +1,52 @@
+import 'package:http/http.dart';
+
+class Dishwasher{
+  String accessToken =
+      'eyJ4LWVudiI6IlBSRCIsImFsZyI6IlJTMjU2IiwieC1yZWciOiJFVSIsImtpZCI6IlMxIn0.eyJmZ3JwIjpbXSwic3ViIjoiZjk1OWU2YTUtODg4Ni00NjBiLWFlNjgtMDZkNzYwZjk2NjEyIiwiYXVkIjoiQ0ExMjlFOEE2NTkyOTUyQjNCOUNBRjdFQkM2OUEwMzc2NEU3M0Q1MUVEMzNGQ0ZFNTk0ODc4NTlCRkNDQUZFQyIsImF6cCI6IkNBMTI5RThBNjU5Mjk1MkIzQjlDQUY3RUJDNjlBMDM3NjRFNzNENTFFRDMzRkNGRTU5NDg3ODU5QkZDQ0FGRUMiLCJzY29wZSI6WyJDb29rUHJvY2Vzc29yLU1vbml0b3IiLCJEcnllci1TZXR0aW5ncyIsIldhc2hlci1Db250cm9sIiwiRHJ5ZXItTW9uaXRvciIsIlNldHRpbmdzIiwiSWRlbnRpZnlBcHBsaWFuY2UiLCJXYXNoZXItU2V0dGluZ3MiLCJDb2ZmZWVNYWtlciIsIldhc2hlciIsIkNvb2tQcm9jZXNzb3ItU2V0dGluZ3MiLCJIb2ItU2V0dGluZ3MiLCJPdmVuLU1vbml0b3IiLCJIb29kLUNvbnRyb2wiLCJXYXNoZXJEcnllci1Nb25pdG9yIiwiT3Zlbi1TZXR0aW5ncyIsIkNvZmZlZU1ha2VyLU1vbml0b3IiLCJNb25pdG9yIiwiSG9iLU1vbml0b3IiLCJXYXNoZXJEcnllci1Db250cm9sIiwiRGlzaHdhc2hlci1Db250cm9sIiwiUmVmcmlnZXJhdG9yLUNvbnRyb2wiLCJEaXNod2FzaGVyIiwiRHJ5ZXItQ29udHJvbCIsIkNsZWFuaW5nUm9ib3QtQ29udHJvbCIsIldpbmVDb29sZXIiLCJGcmVlemVyLU1vbml0b3IiLCJXYXNoZXJEcnllciIsIlJlZnJpZ2VyYXRvci1Nb25pdG9yIiwiQ29va1Byb2Nlc3NvciIsIkZyZWV6ZXIiLCJGcmVlemVyLVNldHRpbmdzIiwiV2luZUNvb2xlci1Db250cm9sIiwiV2luZUNvb2xlci1TZXR0aW5ncyIsIkRpc2h3YXNoZXItU2V0dGluZ3MiLCJIb29kIiwiRHJ5ZXIiLCJGcmlkZ2VGcmVlemVyLU1vbml0b3IiLCJDbGVhbmluZ1JvYm90LVNldHRpbmdzIiwiUmVmcmlnZXJhdG9yIiwiUmVmcmlnZXJhdG9yLVNldHRpbmdzIiwiRGlzaHdhc2hlci1Nb25pdG9yIiwiQ29mZmVlTWFrZXItU2V0dGluZ3MiLCJGcmlkZ2VGcmVlemVyLVNldHRpbmdzIiwiQ2xlYW5pbmdSb2JvdC1Nb25pdG9yIiwiV2luZUNvb2xlci1Nb25pdG9yIiwiRnJlZXplci1Db250cm9sIiwiQ29mZmVlTWFrZXItQ29udHJvbCIsIldhc2hlci1Nb25pdG9yIiwiSG9vZC1Nb25pdG9yIiwiSG9vZC1TZXR0aW5ncyIsIkZyaWRnZUZyZWV6ZXItQ29udHJvbCIsIkNvb2tQcm9jZXNzb3ItQ29udHJvbCIsIldhc2hlckRyeWVyLVNldHRpbmdzIl0sImlzcyI6IkVVOlBSRDowNyIsImV4cCI6MTU4MjExOTU1OSwiaWF0IjoxNTgyMDMzMTU5LCJqdGkiOiI1NTMzZjU2ZS05NjI3LTRjMGEtYWM3OS04YTEyZDhhZmY4ZTgifQ.BgmYLQ6w9T-6xqJYVMCzLHoh_k78DkKP2GiLkldC2iECohRW_EVQ4YiEUZ-4QvYg2jJBts8eOdyEdWMOZCTAOGoeMw2t1F17iTXzPYbn57mIGNdzLNLfM3zYpk6nD169zTvmtji0WUO4RnTDxLUd5li-jLQJTf8lcZthteX2InjGcylWzFbuIzApRSHZQk9NvBuC1j7hxnqgrfn1j6tgognaok0pERwjVWgbY67oPpeQpx0UDOsgX3Xi1mcZ4V2DLYUR0-fUOPuKpEB3ClLDXiKo9wAy17JN9Tj8ESnVdYM9bkolBw_KbeV5x37IddODudqIbgSvekVpW8W0bWIEbA';
+  String srvUrl = 'api.home-connect.com';
+  String haidDishWasher = 'BOSCH-SMS88UI36E-68A40E0EA3B4';
+  String dishWasherSettingsUrl =
+      'https://api.home-connect.com/api/homeappliances/BOSCH-SMS88UI36E-68A40E0EA3B4/settings/BSH.Common.Setting.PowerState';
+  String settingKey = 'BSH.Common.Setting.PowerState';
+  Map<String, String> headers = {
+    'Content-type': 'application/json',
+    'Authorization':
+    'Bearer {} eyJ4LWVudiI6IlBSRCIsImFsZyI6IlJTMjU2IiwieC1yZWciOiJFVSIsImtpZCI6IlMxIn0.eyJmZ3JwIjpbXSwic3ViIjoiZjk1OWU2YTUtODg4Ni00NjBiLWFlNjgtMDZkNzYwZjk2NjEyIiwiYXVkIjoiQ0ExMjlFOEE2NTkyOTUyQjNCOUNBRjdFQkM2OUEwMzc2NEU3M0Q1MUVEMzNGQ0ZFNTk0ODc4NTlCRkNDQUZFQyIsImF6cCI6IkNBMTI5RThBNjU5Mjk1MkIzQjlDQUY3RUJDNjlBMDM3NjRFNzNENTFFRDMzRkNGRTU5NDg3ODU5QkZDQ0FGRUMiLCJzY29wZSI6WyJDb29rUHJvY2Vzc29yLU1vbml0b3IiLCJEcnllci1TZXR0aW5ncyIsIldhc2hlci1Db250cm9sIiwiRHJ5ZXItTW9uaXRvciIsIlNldHRpbmdzIiwiSWRlbnRpZnlBcHBsaWFuY2UiLCJXYXNoZXItU2V0dGluZ3MiLCJDb2ZmZWVNYWtlciIsIldhc2hlciIsIkNvb2tQcm9jZXNzb3ItU2V0dGluZ3MiLCJIb2ItU2V0dGluZ3MiLCJPdmVuLU1vbml0b3IiLCJIb29kLUNvbnRyb2wiLCJXYXNoZXJEcnllci1Nb25pdG9yIiwiT3Zlbi1TZXR0aW5ncyIsIkNvZmZlZU1ha2VyLU1vbml0b3IiLCJNb25pdG9yIiwiSG9iLU1vbml0b3IiLCJXYXNoZXJEcnllci1Db250cm9sIiwiRGlzaHdhc2hlci1Db250cm9sIiwiUmVmcmlnZXJhdG9yLUNvbnRyb2wiLCJEaXNod2FzaGVyIiwiRHJ5ZXItQ29udHJvbCIsIkNsZWFuaW5nUm9ib3QtQ29udHJvbCIsIldpbmVDb29sZXIiLCJGcmVlemVyLU1vbml0b3IiLCJXYXNoZXJEcnllciIsIlJlZnJpZ2VyYXRvci1Nb25pdG9yIiwiQ29va1Byb2Nlc3NvciIsIkZyZWV6ZXIiLCJGcmVlemVyLVNldHRpbmdzIiwiV2luZUNvb2xlci1Db250cm9sIiwiV2luZUNvb2xlci1TZXR0aW5ncyIsIkRpc2h3YXNoZXItU2V0dGluZ3MiLCJIb29kIiwiRHJ5ZXIiLCJGcmlkZ2VGcmVlemVyLU1vbml0b3IiLCJDbGVhbmluZ1JvYm90LVNldHRpbmdzIiwiUmVmcmlnZXJhdG9yIiwiUmVmcmlnZXJhdG9yLVNldHRpbmdzIiwiRGlzaHdhc2hlci1Nb25pdG9yIiwiQ29mZmVlTWFrZXItU2V0dGluZ3MiLCJGcmlkZ2VGcmVlemVyLVNldHRpbmdzIiwiQ2xlYW5pbmdSb2JvdC1Nb25pdG9yIiwiV2luZUNvb2xlci1Nb25pdG9yIiwiRnJlZXplci1Db250cm9sIiwiQ29mZmVlTWFrZXItQ29udHJvbCIsIldhc2hlci1Nb25pdG9yIiwiSG9vZC1Nb25pdG9yIiwiSG9vZC1TZXR0aW5ncyIsIkZyaWRnZUZyZWV6ZXItQ29udHJvbCIsIkNvb2tQcm9jZXNzb3ItQ29udHJvbCIsIldhc2hlckRyeWVyLVNldHRpbmdzIl0sImlzcyI6IkVVOlBSRDowNyIsImV4cCI6MTU4MjExOTU1OSwiaWF0IjoxNTgyMDMzMTU5LCJqdGkiOiI1NTMzZjU2ZS05NjI3LTRjMGEtYWM3OS04YTEyZDhhZmY4ZTgifQ.BgmYLQ6w9T-6xqJYVMCzLHoh_k78DkKP2GiLkldC2iECohRW_EVQ4YiEUZ-4QvYg2jJBts8eOdyEdWMOZCTAOGoeMw2t1F17iTXzPYbn57mIGNdzLNLfM3zYpk6nD169zTvmtji0WUO4RnTDxLUd5li-jLQJTf8lcZthteX2InjGcylWzFbuIzApRSHZQk9NvBuC1j7hxnqgrfn1j6tgognaok0pERwjVWgbY67oPpeQpx0UDOsgX3Xi1mcZ4V2DLYUR0-fUOPuKpEB3ClLDXiKo9wAy17JN9Tj8ESnVdYM9bkolBw_KbeV5x37IddODudqIbgSvekVpW8W0bWIEbA',
+    'Accept': 'application/vnd.bsh.sdk.v1+json',
+    'Content-Type': 'application/vnd.bsh.sdk.v1+json'
+  };
+  String dishWasherActiveProgram =
+      'https://api.home-connect.com/api/homeappliances/BOSCH-SMS88UI36E-68A40E0EA3B4/programs/active';
+
+  void setDishWasherSetting(String opt) async {
+    String json =
+        '{"data": {"key": "BSH.Common.Setting.PowerState", "value": "' +
+            opt +
+            '"}}';
+
+    Response response =
+    await put(dishWasherSettingsUrl, headers: headers, body: json);
+    int statusCode = response.statusCode;
+    print(statusCode);
+  }
+
+  void startProgramInSeconds(int seconds) async {
+    String json =
+        '{"data": {"key": "Dishcare.Dishwasher.Program.Auto2", "options": [{"key": "BSH.Common.Option.StartInRelative", "value": ' +
+            seconds.toString() +
+            ', "unit": "seconds"}]}}';
+
+    Response response =
+    await put(dishWasherActiveProgram, headers: headers, body: json);
+    int statusCode = response.statusCode;
+    print(statusCode);
+  }
+
+  void setDishWasherOn() {
+    setDishWasherSetting('BSH.Common.EnumType.PowerState.On');
+  }
+
+  void setDishWasherOff() {
+    setDishWasherSetting('BSH.Common.EnumType.PowerState.Off');
+  }
+}
