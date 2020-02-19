@@ -95,7 +95,8 @@ class CustomDialog extends StatelessWidget {
                     child: FlatButton(
                       onPressed: () {
                         Connection con = new Connection();
-                        con.setDishWasherOn();
+                        //con.setDishWasherOn();
+                        con.startProgramInSeconds(0);
                       },
                       child: Text(
                         "Start now",
