@@ -100,7 +100,7 @@ class Algo {
       hours = hoursIndex;
       add = "am";
     } else {
-      hours = hoursIndex~/12;
+      hours = hoursIndex-12;
       add = "pm";
     }
     if (minutes == 0) {
