@@ -33,6 +33,13 @@ class _BasicPageState extends State<BasicPage> {
   PageController _pageController;
   int _index = 0;
   bool _isVisible = true;
+  List<SchedulerData> transData = new List<SchedulerData>();
+
+  void onNewSchedulerData(SchedulerData data){
+    setState(() {
+      transData.add(data);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +49,9 @@ class _BasicPageState extends State<BasicPage> {
       ),
       body: new PageView(
         children: [
-          new SchedulePage(Colors.grey),
-          new HomePage(Colors.blue),
-          new HistoryPage(Colors.white)
+          new SchedulePage(onNewSchedulerData),
+          new HomePage(transData, onNewSchedulerData),
+          new HistoryPage()
         ],
         controller: _pageController,
         onPageChanged: onIndexChanged,
@@ -52,7 +59,7 @@ class _BasicPageState extends State<BasicPage> {
       floatingActionButton: new Visibility(
         visible: _isVisible,
         child: new FloatingActionButton(
-          onPressed: () {}, //nothing happens XD
+          onPressed: () {}, //TODO: add new consumer
           tooltip: 'Add',
           child: new Icon(Icons.add),
         ),
@@ -107,4 +114,11 @@ class _BasicPageState extends State<BasicPage> {
     super.dispose();
     _pageController.dispose();
   }
+}
+
+class SchedulerData{
+  String time;
+  String schedulerName;
+  
+  SchedulerData(this.time,this.schedulerName);
 }

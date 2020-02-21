@@ -3,21 +3,23 @@ import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:math' as Math;
 import 'color_palette.dart';
+import 'main.dart';
 
-double START_MONEY_SAVED = 12.43;
-double START_CO_SAVED = 136;
-double START_ECO_SCORE = 0.71;
+const double START_MONEY_SAVED = 12.43;
+const double START_CO_SAVED = 136;
+const double START_ECO_SCORE = 0.71;
 
 class HomePage extends StatelessWidget {
-  final Color color;
+  final List<SchedulerData> data;
+  final Function(SchedulerData) onNewSchedulerData;
 
-  HomePage(this.color);
+  HomePage(this.data, this.onNewSchedulerData);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 10),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Card(
                 elevation: 10,
@@ -32,7 +34,7 @@ class HomePage extends StatelessWidget {
                   ],
                 )),
             Information(),
-            ScheduleTimeline()
+            data.isEmpty ? Container() : ScheduleTimeline(data)
           ],
         ));
   }
@@ -200,54 +202,63 @@ class _COTextState extends State<COText> {
 }
 
 class ScheduleTimeline extends StatelessWidget {
-  startDeley() {
-    Future.delayed(const Duration(milliseconds: 4000), () {
-      //call the https post
-    });
-  }
+  final List<SchedulerData> data;
+
+  ScheduleTimeline(this.data);
 
   @override
   Widget build(BuildContext context) {
-    startDeley();
-    return Card(
-      elevation: 10,
-      child: Container(
-          margin: const EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
-              CircleAvatar(
-                  backgroundColor: Colors.lightBlue,
-                  radius: 40,
-                  child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: SvgPicture.asset("assets/logo_black.svg"))
-                  //Icon(Icons.battery_charging_full,color: Colors.black, size: 50),
-                  ),
-              Container(
-                margin: const EdgeInsets.only(top: 15, bottom: 15),
-                height: 5,
-                color: Colors.black,
-              ),
-              Row(
-                children: <Widget>[
-                  Container(
-                      margin: const EdgeInsets.only(right: 15),
-                      child: Icon(Icons.access_time)),
-                  Container(
-                      margin: const EdgeInsets.only(right: 85),
-                      child: Text(
-                        "8:40pm",
-                        style: TextStyle(fontSize: 24),
-                      )),
-                  Text(
-                    "Dishwasher",
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ],
-              ),
-              Container(margin: const EdgeInsets.only(bottom: 15)),
-            ],
-          )),
+    List<Widget> childes = new List<Widget>();
+    for (int i = 0; i < data.length; i++) {
+      childes.add(new Card(
+        elevation: 10,
+        child: Container(
+            margin: const EdgeInsets.all(10),
+            child: Column(
+              children: <Widget>[
+                i == 0
+                    ? CircleAvatar(
+                        backgroundColor: Colors.lightBlue,
+                        radius: 40,
+                        child: Container(
+                            padding: EdgeInsets.all(10),
+                            child: SvgPicture.asset("assets/logo_black.svg"))
+                        //Icon(Icons.battery_charging_full,color: Colors.black, size: 50),
+                        )
+                    : Container(),
+                i == 0
+                    ? Container(
+                        margin: const EdgeInsets.only(top: 15, bottom: 15),
+                        height: 5,
+                        color: Colors.black,
+                      )
+                    : Container(
+                        margin: const EdgeInsets.only(top: 15),
+                      ),
+                Row(
+                  children: <Widget>[
+                    Container(
+                        margin: const EdgeInsets.only(right: 15),
+                        child: Icon(Icons.access_time)),
+                    Container(
+                        margin: const EdgeInsets.only(right: 25),
+                        child: Text(
+                          data[i].time,
+                          style: TextStyle(fontSize: 24),
+                        )),
+                    Text(
+                      data[i].schedulerName,
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ],
+                ),
+                Container(margin: const EdgeInsets.only(bottom: 15)),
+              ],
+            )),
+      ));
+    }
+    return Column(
+      children: childes,
     );
   }
 }

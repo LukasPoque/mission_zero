@@ -3,21 +3,22 @@ import 'package:flutter_xlider/flutter_xlider.dart';
 
 import 'algo.dart';
 import 'custom_dialog.dart';
+import 'main.dart';
 
 class SchedulePage extends StatelessWidget {
-  final Color color;
+  final Function(SchedulerData) onNewSchedulerData;
 
-  SchedulePage(this.color);
+  SchedulePage(this.onNewSchedulerData);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 10),
-        child: Column(
+        child: ListView(
           children: <Widget>[
-            ListItem("Dishwasher", 19, 22),
-            ListItem("Washing machine", 8, 17),
-            ListItem("Dryer", 3, 9)
+            ListItem("Dishwasher", onNewSchedulerData, 19, 22),
+            ListItem("Washing machine", onNewSchedulerData, 8, 17),
+            ListItem("Dryer", onNewSchedulerData, 3, 9)
           ],
         ));
   }
@@ -25,12 +26,16 @@ class SchedulePage extends StatelessWidget {
 
 class ListItem extends StatelessWidget {
   final String name;
+  final Function(SchedulerData) onNewSchedulerData;
   final double startValue;
   final double endValue;
   double _lowerValue;
   double _upperValue;
 
-  ListItem(this.name, this.startValue, this.endValue);
+  ListItem(this.name, this.onNewSchedulerData, this.startValue, this.endValue) {
+    _lowerValue = startValue;
+    _upperValue = endValue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +77,11 @@ class ListItem extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return CustomDialog(
-                        title: "The best starting time for your " + name + ":",
+                        name: name,
                         description: calculateSpot(
                             _lowerValue.floor(), _upperValue.floor()),
                         buttonText: "Agree",
+                        onAgreed: onAgreedDialog,
                       );
                     });
               },
@@ -89,5 +95,9 @@ class ListItem extends StatelessWidget {
 
   String calculateSpot(start, end) {
     return Algo.main(start, 0, end, 0);
+  }
+
+  void onAgreedDialog(String time, String consumer) {
+    onNewSchedulerData(new SchedulerData(time, consumer));
   }
 }
